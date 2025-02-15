@@ -1,2 +1,2 @@
-.vscode
-src\build\Debug
+*.vscode
+*src/build/Debug
