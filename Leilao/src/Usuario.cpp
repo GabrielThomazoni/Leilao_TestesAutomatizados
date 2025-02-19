@@ -13,7 +13,7 @@ std::string Usuario::recuperaNome() const
 
 std::string Usuario::recuperaSobrenome() const {
     if(nome.find(" ") != std::string::npos){
-        return nome.substr(nome.find(" ") +1, nome.size());
+        return nome.substr(nome.find(" ") +1);
     }else return "Não informado";
     
 }
