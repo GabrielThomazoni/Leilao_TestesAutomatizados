@@ -1,5 +1,6 @@
 #pragma once
 #include "Usuario.hpp"
+#include <string>
 
 class Lance
 {
@@ -9,7 +10,7 @@ private:
 public:
     Lance(Usuario usuario, float valor);
     float recuperaValor() const;
-    Usuario getUsuario() const;
+    std::string getUsuario() const;
 };
 
 

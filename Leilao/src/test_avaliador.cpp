@@ -86,13 +86,13 @@ std::cout << "Menor lance foi: " << leiloeiro.getMenorLance() << std::endl;
 
 }  */
 
-TEST_CASE("Testando o MAIOR e o MENOR lance de um leilão com 5 lances, independente da ordem dos lances") {
+TEST_CASE("Testando o MAIOR e o MENOR lances") {
     
     Avaliador leiloeiro;
     
     SECTION("Leiloes pegando Maior e Menor lance"){
         Leilao leilao = GENERATE(criaLeilaoTV(), criaLeilaoPS3()); //Só funciona se os leiloes tiverem os mesmo valores dos lances
-                
+
         SECTION("Testando Maior e Menor lance"){
             leiloeiro.avalia(leilao);
             float valMaiorEsperado = 650;
@@ -126,4 +126,50 @@ TEST_CASE("Testando o MAIOR e o MENOR lance de um leilão com 5 lances, independ
     }
     
 } 
+
+TEST_CASE("Testando se o leilão impede dois lances seguidos da mesma pessoa"){
+    //Preparando para o teste (Arrange - Given)
+    Leilao leilao("Azeite de Oliva");
+    Usuario Biel("Gabriel");
+    Usuario Maily("Maily");
+
+    Lance lance1(Biel, 1250);
+    Lance lance2(Biel, 1500);
+    Lance lance3(Maily, 1200);
+    Lance lance4(Biel, 2000);
+    Lance lance5(Biel, 3000);
+    Lance lance6(Biel, 3500);
+    Lance lance7(Maily, 5000);
+    
+    //Executando o código a ser testado (Act - When)
+    leilao.recebeLance(lance1);
+    leilao.recebeLance(lance2);
+    leilao.recebeLance(lance3);
+    leilao.recebeLance(lance4);
+    leilao.recebeLance(lance5);
+    leilao.recebeLance(lance6);
+    leilao.recebeLance(lance7);
+
+    //Verificando se o código se comportou como esperado (Assert - Then)
+    float ultLance = leilao.recuperaLances().back().recuperaValor();
+    REQUIRE(leilao.recuperaLances().size() == 4);
+    REQUIRE(leilao.recuperaLances()[1].recuperaValor() == 1200);
+    std::cout << "Leiloando: " << leilao.getDescricao() << std::endl;
+    std::cout << "Último lance: " << ultLance << std::endl;
+}
  
+TEST_CASE("Testando usuários com nome composto, retornando só o primeiro"){
+
+    //Preparando para o teste (Arrange - Given)
+    Usuario Gabriel("Gabriel Thomazoni");
+
+    //Executando o código a ser testado (Act - When)
+    std::string primeiroNome = Gabriel.recuperaNome();
+    std::string sobrenome = Gabriel.recuperaSobrenome();
+
+    //Verificando se o código se comportou como esperado (Assert - Then)
+    REQUIRE(primeiroNome == "Gabriel");
+    REQUIRE(sobrenome == "Thomazoni");
+    std::cout << "Primeiro nome: " << Gabriel.recuperaNome() << std::endl;
+    std::cout << "Sobrenome: " << Gabriel.recuperaSobrenome() << std::endl;
+}

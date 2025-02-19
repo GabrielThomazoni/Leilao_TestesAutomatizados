@@ -8,6 +8,9 @@ class Leilao
 private:
     std::vector<Lance> lances;
     std::string descricao;
+
+    bool lanceValido(const Lance& lance);
+
 public:
     Leilao(std::string descricao);
     const std::vector<Lance>& recuperaLances() const;

@@ -8,5 +8,6 @@ private:
 public:
     Usuario(std::string);
     std::string recuperaNome() const;
+    std::string recuperaSobrenome() const;
 };
 
