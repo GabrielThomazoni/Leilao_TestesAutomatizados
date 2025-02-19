@@ -9,6 +9,7 @@ private:
 public:
     Lance(Usuario usuario, float valor);
     float recuperaValor() const;
+    Usuario getUsuario() const;
 };
 
 

@@ -8,3 +8,7 @@ float Lance::recuperaValor() const
 {
     return valor;
 }
+
+Usuario Lance::getUsuario() const{
+    return usuario;
+}

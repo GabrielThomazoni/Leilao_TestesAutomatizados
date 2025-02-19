@@ -14,3 +14,7 @@ void Leilao::recebeLance(const Lance& lance)
 {
     lances.push_back(lance);
 }
+
+std::string Leilao::getDescricao() const{
+    return descricao;
+}
